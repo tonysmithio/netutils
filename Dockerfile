@@ -1,5 +1,5 @@
 FROM alpine
-RUN apk update; apk add bind-tools mtr socat tcpdump curl wget dpkg; \
-wget https://github.com/Yelp/dumb-init/releases/download/v1.2.5/dumb-init_1.2.5_amd64.deb; \
-dpkg -i dumb-init_*.deb; apk del wget dpkg
-ENTRYPOINT ["dumb-init", "/bin/sh"]
+RUN apk update; apk add bind-tools mtr socat tcpdump curl
+ADD dumb-init/dumb-init /usr/bin/dumb-init
+RUN chmod +x /usr/bin/dumb-init
+ENTRYPOINT ["dumb-init", "--"]
